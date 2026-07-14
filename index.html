@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Translate & Speak</title>
+</head>
+<body style="font-family: Arial; max-width: 500px; margin: 50px auto;">
+
+    <h2>Text Translator + Voice</h2>
+
+    <form method="POST">
+        <label>Enter text:</label><br>
+        <textarea name="text" rows="4" cols="40" required></textarea><br><br>
+
+        <label>Select target language:</label><br>
+        <select name="target">
+            {% for code, name in languages.items() %}
+                <option value="{{ code }}">{{ name }} ({{ code }})</option>
+            {% endfor %}
+        </select><br><br>
+
+        <button type="submit">Translate & Speak</button>
+    </form>
+
+    {% if translated_text %}
+        <h3>Translated Text:</h3>
+        <p>{{ translated_text }}</p>
+
+        <h3>Voice:</h3>
+        <audio controls autoplay>
+            <source src="/audio" type="audio/mpeg">
+        </audio>
+    {% endif %}
+
+</body>
+</html>

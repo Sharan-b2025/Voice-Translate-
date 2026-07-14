@@ -2,3 +2,6 @@ flask
 gunicorn
 deep-translator
 gtts
+openai
+openai-whisper
+ffmpeg-python

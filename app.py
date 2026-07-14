@@ -110,3 +110,40 @@ def audio():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+from openai import OpenAI
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+def ai_reply(text):
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful multilingual AI assistant."
+            },
+            {
+                "role": "user",
+                "content": text
+            }
+        ]
+    )
+
+    return response.choices[0].message.content
+    reply = ai_reply(original_text)
+    reply_tamil = GoogleTranslator(
+    source="auto",
+    target="ta"
+).translate(reply)
+    reply_user = GoogleTranslator(
+    source="auto",
+    target=detected_language
+).translate(reply)
+    gTTS(reply_tamil, lang="ta").save("reply_tamil.mp3")
+    gTTS(reply_user, lang=detected_language).save("reply_user.mp3")
+    @app.route("/reply_tamil")
+def reply_tamil_audio():
+    return send_file("reply_tamil.mp3", mimetype="audio/mpeg")
+
+
+@app.route("/reply_user")
+def reply_user_audio():
+    return send_file("reply_user.mp3", mimetype="audio/mpeg")

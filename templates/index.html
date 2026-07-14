@@ -33,3 +33,45 @@
 
 </body>
 </html>
+<form method="POST">
+
+<textarea name="text" rows="6" cols="60"
+placeholder="Type here..."></textarea>
+
+<br><br>
+
+<select name="target">
+{% for code,name in languages.items() %}
+<option value="{{code}}">{{name}}</option>
+{% endfor %}
+</select>
+
+<br><br>
+
+<button type="submit">Translate Text</button>
+
+<button type="submit" name="voice" value="1">
+🎤 Speak
+</button>
+
+</form>
+
+{% if original_text %}
+<h3>Recognized Speech</h3>
+<p>{{original_text}}</p>
+
+<h3>Detected Language</h3>
+<p>{{detected_language}}</p>
+
+<h3>Translation</h3>
+<p>{{translated_text}}</p>
+
+<h3>AI Summary</h3>
+<p>{{summary}}</p>
+
+<h3>AI Sentiment</h3>
+<p>{{emotion.label}} ({{emotion.score}})</p>
+
+<a href="/audio">🔊 Listen</a>
+
+{% endif %}

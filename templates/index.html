@@ -75,3 +75,16 @@ placeholder="Type here..."></textarea>
 <a href="/audio">🔊 Listen</a>
 
 {% endif %}
+<audio id="userAudio" autoplay>
+    <source src="/reply_user" type="audio/mpeg">
+</audio>
+
+<audio id="tamilAudio">
+    <source src="/reply_tamil" type="audio/mpeg">
+</audio>
+
+<script>
+document.getElementById("userAudio").addEventListener("ended", function() {
+    document.getElementById("tamilAudio").play();
+});
+</script>

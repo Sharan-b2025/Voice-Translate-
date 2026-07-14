@@ -1,7 +1,11 @@
-flask
-gunicorn
+Flask
 deep-translator
-gtts
-openai
-openai-whisper
-ffmpeg-python
+gTTS
+SpeechRecognition
+langdetect
+transformers
+torch
+sentencepiece
+accelerate
+pydub
+PyAudio
